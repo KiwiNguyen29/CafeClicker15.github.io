@@ -9,9 +9,25 @@
 </head>
 
 <body>
+    <div id="click-counter">Clicks: 0</div>
+    <div id="upgrade-stats" class="stats-panel">
+        <div class="stat-entry"><span class="stat-name">Click Power:</span> <span id="stat-click-power">1</span></div>
+        <div class="stat-entry"><span class="stat-name">Ice Cube Bought:</span> <span id="stat-ice-count">0</span></div>
+        <div class="stat-entry"><span class="stat-name">Milk Bought:</span> <span id="stat-milk-count">0</span></div>
+    </div>
     <h1>Cafe Clicker</h1>
     <div class="MainButton"><img src="Deus_Coffee.png" alt="Main Button"></div>
-    <div class="container"><button>1</button><button>2</button><button>3</button></div>
+    <div class="container">
+        <div class="upgrade-card">
+            <button id="upgrade-1" class="upgrade-button" aria-label="Ice Cubes Upgrade"></button>
+            <div id="upgrade-1-cost" class="upgrade-cost"></div>
+        </div>
+        <div class="upgrade-card">
+            <button id="upgrade-2" class="upgrade-button" aria-label="Milk Upgrade"></button>
+            <div id="upgrade-2-cost" class="upgrade-cost"></div>
+        </div>
+        <button>3</button>
+    </div>
     <script src="kiwi_clicker.js"></script>
 </body>
 
