@@ -17,13 +17,15 @@ body {
 .container {
     flex-direction: column;
     display: flex;
+    flex-wrap: wrap;
+    max-height: 600px;
     padding-left: 20px;
     margin-left: 20px;
 }
 
 .container {
     align-items: flex-start;
-    gap: 8px;
+    gap: 2px;
 }
 
 /* Ensure buttons size to their content */
@@ -67,6 +69,27 @@ button {
 
 #upgrade-2 {
     background-image: url('milk.avif');
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+#upgrade-3 {
+    background-image: url('tea.jpg');
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+#upgrade-4 {
+    background-image: url('coffee.jpeg');
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+#upgrade-5 {
+    background-image: url('matcha.jpg');
     background-size: cover;
     background-position: center;
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);

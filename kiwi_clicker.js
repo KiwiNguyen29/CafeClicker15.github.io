@@ -34,11 +34,22 @@ document.addEventListener('DOMContentLoaded', () => {
     let milkUpgradeCost = 200;
     const upgradeBtn2 = document.querySelector('#upgrade-2');
     const upgrade2CostLabel = document.querySelector('#upgrade-2-cost');
+    const upgradeBtn3 = document.querySelector('#upgrade-3');
+    const upgrade3CostLabel = document.querySelector('#upgrade-3-cost');
     let icePurchaseCount = 0;
     let milkPurchaseCount = 0;
+    let teaPurchaseCount = 0;
+    let teaUpgradeCost = 500;
+    let coffeeUpgradeCost = 1000;
+    let coffeePurchaseCount = 0;
+    let matchaUpgradeCost = 2000;
+    let matchaPurchaseCount = 0;
     const statClickPower = document.querySelector('#stat-click-power');
     const statIceCount = document.querySelector('#stat-ice-count');
     const statMilkCount = document.querySelector('#stat-milk-count');
+    const statTeaCount = document.querySelector('#stat-tea-count');
+    const statCoffeeCount = document.querySelector('#stat-coffee-count');
+    const statMatchaCount = document.querySelector('#stat-matcha-count');
     const updateUpgradeCostLabel = () => {
         if (upgradeCostLabel) {
             upgradeCostLabel.textContent = `Cost: ${upgradeCost}`;
@@ -58,6 +69,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (statMilkCount) {
             statMilkCount.textContent = milkPurchaseCount;
+        }
+        if (statTeaCount) {
+            statTeaCount.textContent = teaPurchaseCount;
+        }
+        if (statCoffeeCount) {
+            statCoffeeCount.textContent = coffeePurchaseCount;
+        }
+        if (statMatchaCount) {
+            statMatchaCount.textContent = matchaPurchaseCount;
         }
     };
 
@@ -109,6 +129,93 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } else {
                 alert(`Not enough clicks! You need ${milkUpgradeCost} clicks for this upgrade.`);
+            }
+        });
+    }
+
+    // Handle upgrade button 3 - Tea Upgrade
+    const updateTeaUpgradeLabel = () => {
+        if (upgrade3CostLabel) {
+            upgrade3CostLabel.textContent = `Cost: ${teaUpgradeCost}`;
+        }
+    };
+
+    if (upgradeBtn3) {
+        updateTeaUpgradeLabel();
+        updateStats();
+
+        upgradeBtn3.addEventListener('click', () => {
+            if (clickCount >= teaUpgradeCost) {
+                clickCount -= teaUpgradeCost;
+                clickValue *= 1.15;
+                teaPurchaseCount += 1;
+                teaUpgradeCost = Math.ceil(teaUpgradeCost * 1.5);
+                updateTeaUpgradeLabel();
+                updateStats();
+                if (counter) {
+                    counter.textContent = `Clicks: ${clickCount}`;
+                }
+            } else {
+                alert(`Not enough clicks! You need ${teaUpgradeCost} clicks for this upgrade.`);
+            }
+        });
+    }
+
+    // Handle upgrade button 4 - Coffee Upgrade
+    const upgradeBtn4 = document.querySelector('#upgrade-4');
+    const upgrade4CostLabel = document.querySelector('#upgrade-4-cost');
+    const updateCoffeeUpgradeLabel = () => {
+        if (upgrade4CostLabel) {
+            upgrade4CostLabel.textContent = `Cost: ${coffeeUpgradeCost}`;
+        }
+    };
+
+    if (upgradeBtn4) {
+        updateCoffeeUpgradeLabel();
+        updateStats();
+
+        upgradeBtn4.addEventListener('click', () => {
+            if (clickCount >= coffeeUpgradeCost) {
+                clickCount -= coffeeUpgradeCost;
+                clickValue += 10;
+                coffeePurchaseCount += 1;
+                coffeeUpgradeCost = Math.ceil(coffeeUpgradeCost * 1.5);
+                updateCoffeeUpgradeLabel();
+                updateStats();
+                if (counter) {
+                    counter.textContent = `Clicks: ${clickCount}`;
+                }
+            } else {
+                alert(`Not enough clicks! You need ${coffeeUpgradeCost} clicks for this upgrade.`);
+            }
+        });
+    }
+
+    // Handle upgrade button 5 - Matcha Upgrade
+    const upgradeBtn5 = document.querySelector('#upgrade-5');
+    const upgrade5CostLabel = document.querySelector('#upgrade-5-cost');
+    const updateMatchaUpgradeLabel = () => {
+        if (upgrade5CostLabel) {
+            upgrade5CostLabel.textContent = `Cost: ${matchaUpgradeCost}`;
+        }
+    };
+
+    if (upgradeBtn5) {
+        updateMatchaUpgradeLabel();
+        updateStats();
+
+        upgradeBtn5.addEventListener('click', () => {
+            if (clickCount >= matchaUpgradeCost) {
+                clickCount -= matchaUpgradeCost;
+                clickValue += 25;
+                matchaPurchaseCount += 1;
+                updateMatchaUpgradeLabel();
+                updateStats();
+                if (counter) {
+                    counter.textContent = `Clicks: ${clickCount}`;
+                }
+            } else {
+                alert(`Not enough clicks! You need ${matchaUpgradeCost} clicks for this upgrade.`);
             }
         });
     }
