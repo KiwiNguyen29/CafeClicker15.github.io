@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!main) return;
 
-    // Trigger pulsate on left mouse button (button === 0)
     main.addEventListener('pointerdown', (e) => {
         if (e.button !== 0) return;
         clickCount += clickValue;
@@ -15,20 +14,17 @@ document.addEventListener('DOMContentLoaded', () => {
             counter.textContent = `Clicks: ${clickCount}`;
         }
 
-        // restart animation by removing and re-adding class
         main.classList.remove('pulsing');
-        void main.offsetWidth; // force reflow
+        void main.offsetWidth;
         main.classList.add('pulsing');
     });
 
-    // Clean up class after animation ends
     main.addEventListener('animationend', (e) => {
         if (e.animationName === 'pulsate') {
             main.classList.remove('pulsing');
         }
     });
 
-    // Handle upgrade button 1 - costs 25 clicks, increases click value by 1
     const upgradeBtn1 = document.querySelector('#upgrade-1');
     const upgradeCostLabel = document.querySelector('#upgrade-1-cost');
     let milkUpgradeCost = 200;
@@ -36,6 +32,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const upgrade2CostLabel = document.querySelector('#upgrade-2-cost');
     const upgradeBtn3 = document.querySelector('#upgrade-3');
     const upgrade3CostLabel = document.querySelector('#upgrade-3-cost');
+    const upgradeBtn6 = document.querySelector('#upgrade-6');
+    const upgrade6CostLabel = document.querySelector('#upgrade-6-cost');
+    const upgradeBtn7 = document.querySelector('#upgrade-7');
+    const upgrade7CostLabel = document.querySelector('#upgrade-7-cost');
+    const upgradeBtn8 = document.querySelector('#upgrade-8');
+    const upgrade8CostLabel = document.querySelector('#upgrade-8-cost');
+    const upgradeBtn9 = document.querySelector('#upgrade-9');
+    const upgrade9CostLabel = document.querySelector('#upgrade-9-cost');
+    const upgradeBtn10 = document.querySelector('#upgrade-10');
+    const upgrade10CostLabel = document.querySelector('#upgrade-10-cost');
     let icePurchaseCount = 0;
     let milkPurchaseCount = 0;
     let teaPurchaseCount = 0;
@@ -44,12 +50,27 @@ document.addEventListener('DOMContentLoaded', () => {
     let coffeePurchaseCount = 0;
     let matchaUpgradeCost = 2000;
     let matchaPurchaseCount = 0;
+    let sugarUpgradeCost = 4000;
+    let syrupUpgradeCost = 8000;
+    let whippedCreamUpgradeCost = 16000;
+    let iceCreamUpgradeCost = 32000;
+    let jellyUpgradeCost = 64000;
+    let sugarPurchaseCount = 0;
+    let syrupPurchaseCount = 0;
+    let whippedCreamPurchaseCount = 0;
+    let iceCreamPurchaseCount = 0;
+    let jellyPurchaseCount = 0;
     const statClickPower = document.querySelector('#stat-click-power');
     const statIceCount = document.querySelector('#stat-ice-count');
     const statMilkCount = document.querySelector('#stat-milk-count');
     const statTeaCount = document.querySelector('#stat-tea-count');
     const statCoffeeCount = document.querySelector('#stat-coffee-count');
     const statMatchaCount = document.querySelector('#stat-matcha-count');
+    const statSugarCount = document.querySelector('#stat-sugar-count');
+    const statSyrupCount = document.querySelector('#stat-syrup-count');
+    const statWhippedCreamCount = document.querySelector('#stat-whipped-cream-count');
+    const statIceCreamCount = document.querySelector('#stat-ice-cream-count');
+    const statJellyCount = document.querySelector('#stat-jelly-count');
     const updateUpgradeCostLabel = () => {
         if (upgradeCostLabel) {
             upgradeCostLabel.textContent = `Cost: ${upgradeCost}`;
@@ -60,6 +81,34 @@ document.addEventListener('DOMContentLoaded', () => {
             upgrade2CostLabel.textContent = `Cost: ${milkUpgradeCost}`;
         }
     };
+    const updateSugarUpgradeLabel = () => {
+        if (upgrade6CostLabel) {
+            upgrade6CostLabel.textContent = `Cost: ${sugarUpgradeCost}`;
+        }
+    };
+    const updateSyrupUpgradeLabel = () => {
+        if (upgrade7CostLabel) {
+            upgrade7CostLabel.textContent = `Cost: ${syrupUpgradeCost}`;
+        }
+    };
+    const updateWhippedCreamUpgradeLabel = () => {
+        if (upgrade8CostLabel) {
+            upgrade8CostLabel.textContent = `Cost: ${whippedCreamUpgradeCost}`;
+        }
+    };
+    const updateIceCreamUpgradeLabel = () => {
+        if (upgrade9CostLabel) {
+            upgrade9CostLabel.textContent = `Cost: ${iceCreamUpgradeCost}`;
+        }
+    };
+    const updateJellyUpgradeLabel = () => {
+        if (upgrade10CostLabel) {
+            upgrade10CostLabel.textContent = `Cost: ${jellyUpgradeCost}`;
+        }
+    };
+
+
+
     const updateStats = () => {
         if (statClickPower) {
             statClickPower.textContent = clickValue.toFixed(2).replace(/\.00$/, '');
@@ -78,6 +127,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (statMatchaCount) {
             statMatchaCount.textContent = matchaPurchaseCount;
+        }
+        if (statSugarCount) {
+            statSugarCount.textContent = sugarPurchaseCount;
+        }
+        if (statSyrupCount) {
+            statSyrupCount.textContent = syrupPurchaseCount;
+        }
+        if (statWhippedCreamCount) {
+            statWhippedCreamCount.textContent = whippedCreamPurchaseCount;
+        }
+        if (statIceCreamCount) {
+            statIceCreamCount.textContent = iceCreamPurchaseCount;
+        }
+        if (statJellyCount) {
+            statJellyCount.textContent = jellyPurchaseCount;
         }
     };
 
@@ -100,8 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (counter) {
                     counter.textContent = `Clicks: ${clickCount}`;
                 }
-            } else {
-                alert(`Not enough clicks! You need ${upgradeCost} clicks for this upgrade.`);
             }
         });
 
@@ -127,13 +189,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (counter) {
                     counter.textContent = `Clicks: ${clickCount}`;
                 }
-            } else {
-                alert(`Not enough clicks! You need ${milkUpgradeCost} clicks for this upgrade.`);
+                upgradeBtn2.classList.remove('pulsing');
+                void upgradeBtn2.offsetWidth;
+                upgradeBtn2.classList.add('pulsing');
+            }
+        });
+        upgradeBtn2.addEventListener('animationend', (e) => {
+            if (e.animationName === 'pulsate') {
+                upgradeBtn2.classList.remove('pulsing');
             }
         });
     }
 
-    // Handle upgrade button 3 - Tea Upgrade
     const updateTeaUpgradeLabel = () => {
         if (upgrade3CostLabel) {
             upgrade3CostLabel.textContent = `Cost: ${teaUpgradeCost}`;
@@ -147,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
         upgradeBtn3.addEventListener('click', () => {
             if (clickCount >= teaUpgradeCost) {
                 clickCount -= teaUpgradeCost;
-                clickValue *= 1.15;
+                clickValue *= 1.5;
                 teaPurchaseCount += 1;
                 teaUpgradeCost = Math.ceil(teaUpgradeCost * 1.5);
                 updateTeaUpgradeLabel();
@@ -155,13 +222,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (counter) {
                     counter.textContent = `Clicks: ${clickCount}`;
                 }
-            } else {
-                alert(`Not enough clicks! You need ${teaUpgradeCost} clicks for this upgrade.`);
+                upgradeBtn3.classList.remove('pulsing');
+                void upgradeBtn3.offsetWidth;
+                upgradeBtn3.classList.add('pulsing');
+            }
+        });
+        upgradeBtn3.addEventListener('animationend', (e) => {
+            if (e.animationName === 'pulsate') {
+                upgradeBtn3.classList.remove('pulsing');
             }
         });
     }
 
-    // Handle upgrade button 4 - Coffee Upgrade
     const upgradeBtn4 = document.querySelector('#upgrade-4');
     const upgrade4CostLabel = document.querySelector('#upgrade-4-cost');
     const updateCoffeeUpgradeLabel = () => {
@@ -185,13 +257,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (counter) {
                     counter.textContent = `Clicks: ${clickCount}`;
                 }
-            } else {
-                alert(`Not enough clicks! You need ${coffeeUpgradeCost} clicks for this upgrade.`);
+                upgradeBtn4.classList.remove('pulsing');
+                void upgradeBtn4.offsetWidth;
+                upgradeBtn4.classList.add('pulsing');
+            }
+        });
+        upgradeBtn4.addEventListener('animationend', (e) => {
+            if (e.animationName === 'pulsate') {
+                upgradeBtn4.classList.remove('pulsing');
             }
         });
     }
 
-    // Handle upgrade button 5 - Matcha Upgrade
     const upgradeBtn5 = document.querySelector('#upgrade-5');
     const upgrade5CostLabel = document.querySelector('#upgrade-5-cost');
     const updateMatchaUpgradeLabel = () => {
@@ -214,8 +291,149 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (counter) {
                     counter.textContent = `Clicks: ${clickCount}`;
                 }
-            } else {
-                alert(`Not enough clicks! You need ${matchaUpgradeCost} clicks for this upgrade.`);
+                upgradeBtn5.classList.remove('pulsing');
+                void upgradeBtn5.offsetWidth;
+                upgradeBtn5.classList.add('pulsing');
+            }
+        });
+        upgradeBtn5.addEventListener('animationend', (e) => {
+            if (e.animationName === 'pulsate') {
+                upgradeBtn5.classList.remove('pulsing');
+            }
+        });
+    }
+
+    if (upgradeBtn6) {
+        updateSugarUpgradeLabel();
+        updateStats();
+
+        upgradeBtn6.addEventListener('click', () => {
+            if (clickCount >= sugarUpgradeCost) {
+                clickCount -= sugarUpgradeCost;
+                clickValue += 50;
+                sugarPurchaseCount += 1;
+                sugarUpgradeCost = Math.ceil(sugarUpgradeCost * 1.5);
+                updateSugarUpgradeLabel();
+                updateStats();
+                if (counter) {
+                    counter.textContent = `Clicks: ${clickCount}`;
+                }
+                upgradeBtn6.classList.remove('pulsing');
+                void upgradeBtn6.offsetWidth;
+                upgradeBtn6.classList.add('pulsing');
+            }
+        });
+        upgradeBtn6.addEventListener('animationend', (e) => {
+            if (e.animationName === 'pulsate') {
+                upgradeBtn6.classList.remove('pulsing');
+            }
+        });
+    }
+
+    if (upgradeBtn7) {
+        updateSyrupUpgradeLabel();
+        updateStats();
+
+        upgradeBtn7.addEventListener('click', () => {
+            if (clickCount >= syrupUpgradeCost) {
+                clickCount -= syrupUpgradeCost;
+                clickValue += 100;
+                syrupPurchaseCount += 1;
+                syrupUpgradeCost = Math.ceil(syrupUpgradeCost * 1.5);
+                updateSyrupUpgradeLabel();
+                updateStats();
+                if (counter) {
+                    counter.textContent = `Clicks: ${clickCount}`;
+                }
+                upgradeBtn7.classList.remove('pulsing');
+                void upgradeBtn7.offsetWidth;
+                upgradeBtn7.classList.add('pulsing');
+            }
+        });
+        upgradeBtn7.addEventListener('animationend', (e) => {
+            if (e.animationName === 'pulsate') {
+                upgradeBtn7.classList.remove('pulsing');
+            }
+        });
+    }
+
+    if (upgradeBtn8) {
+        updateWhippedCreamUpgradeLabel();
+        updateStats();
+
+        upgradeBtn8.addEventListener('click', () => {
+            if (clickCount >= whippedCreamUpgradeCost) {
+                clickCount -= whippedCreamUpgradeCost;
+                clickValue *= 2;
+                whippedCreamPurchaseCount += 1;
+                whippedCreamUpgradeCost = Math.ceil(whippedCreamUpgradeCost * 1.5);
+                updateWhippedCreamUpgradeLabel();
+                updateStats();
+                if (counter) {
+                    counter.textContent = `Clicks: ${clickCount}`;
+                }
+                upgradeBtn8.classList.remove('pulsing');
+                void upgradeBtn8.offsetWidth;
+                upgradeBtn8.classList.add('pulsing');
+            }
+        });
+        upgradeBtn8.addEventListener('animationend', (e) => {
+            if (e.animationName === 'pulsate') {
+                upgradeBtn8.classList.remove('pulsing');
+            }
+        });
+    }
+
+    if (upgradeBtn9) {
+        updateIceCreamUpgradeLabel();
+        updateStats();
+
+        upgradeBtn9.addEventListener('click', () => {
+            if (clickCount >= iceCreamUpgradeCost) {
+                clickCount -= iceCreamUpgradeCost;
+                clickValue += 250;
+                iceCreamPurchaseCount += 1;
+                iceCreamUpgradeCost = Math.ceil(iceCreamUpgradeCost * 1.5);
+                updateIceCreamUpgradeLabel();
+                updateStats();
+                if (counter) {
+                    counter.textContent = `Clicks: ${clickCount}`;
+                }
+                upgradeBtn9.classList.remove('pulsing');
+                void upgradeBtn9.offsetWidth;
+                upgradeBtn9.classList.add('pulsing');
+            }
+        });
+        upgradeBtn9.addEventListener('animationend', (e) => {
+            if (e.animationName === 'pulsate') {
+                upgradeBtn9.classList.remove('pulsing');
+            }
+        });
+    }
+
+    if (upgradeBtn10) {
+        updateJellyUpgradeLabel();
+        updateStats();
+
+        upgradeBtn10.addEventListener('click', () => {
+            if (clickCount >= jellyUpgradeCost) {
+                clickCount -= jellyUpgradeCost;
+                clickValue *= 6;
+                jellyPurchaseCount += 1;
+                jellyUpgradeCost = Math.ceil(jellyUpgradeCost * 1.5);
+                updateJellyUpgradeLabel();
+                updateStats();
+                if (counter) {
+                    counter.textContent = `Clicks: ${clickCount}`;
+                }
+                upgradeBtn10.classList.remove('pulsing');
+                void upgradeBtn10.offsetWidth;
+                upgradeBtn10.classList.add('pulsing');
+            }
+        });
+        upgradeBtn10.addEventListener('animationend', (e) => {
+            if (e.animationName === 'pulsate') {
+                upgradeBtn10.classList.remove('pulsing');
             }
         });
     }

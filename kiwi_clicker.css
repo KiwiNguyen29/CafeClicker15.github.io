@@ -8,37 +8,59 @@ body {
     background-size: cover;
 }
 
-/* Ensure the body fills the viewport for centering */
 body {
     min-height: 100vh;
     margin: 0;
 }
 
 .container {
-    flex-direction: column;
+    position: fixed;
+    left: 8px;
+    top: 220px;
     display: flex;
     flex-wrap: wrap;
-    max-height: 600px;
-    padding-left: 20px;
-    margin-left: 20px;
-}
-
-.container {
     align-items: flex-start;
-    gap: 2px;
+    justify-content: flex-start;
+    gap: 4px;
+    padding: 0;
+    margin: 0;
+    max-width: 420px;
+    z-index: 9997;
 }
 
-/* Ensure buttons size to their content */
+.upgrade-card {
+    flex: 0 1 calc(33.333% - 6px);
+    max-width: calc(33.333% - 6px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.upgrade-description {
+    color: #ddd;
+    font-size: 12px;
+    text-align: left;
+    max-width: 96px;
+    line-height: 1.4;
+}
+
+@media (max-width: 520px) {
+    .upgrade-card {
+        flex: 0 1 100%;
+        max-width: 100%;
+    }
+}
+
 button {
     width: auto;
     padding: 10px 16px;
     border-radius: 12px;
 }
 
-/* Shared upgrade button style */
 .upgrade-button {
-    width: 120px;
-    height: 120px;
+    width: 96px;
+    height: 96px;
     border: none;
     background-color: transparent;
     background-size: contain;
@@ -63,7 +85,6 @@ button {
 #upgrade-1:focus,
 #upgrade-1:focus-visible,
 #upgrade-1:active {
-    outline: none;
     box-shadow: none;
 }
 
@@ -95,27 +116,56 @@ button {
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
 }
 
+#upgrade-6 {
+    background-image: url('Sugar.avif');
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+#upgrade-7 {
+    background-image: url('Syrup.jpeg');
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+#upgrade-8 {
+    background-image: url('Whipped Cream.jpg');
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+#upgrade-9 {
+    background-image: url('ice cream.jpeg');
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+#upgrade-10 {
+    background-image: url('jelly.jpg');
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
 #upgrade-1.pulsing {
     animation: pulsate 0.9s cubic-bezier(.2, .8, .2, 1);
     will-change: transform, box-shadow, filter;
 }
 
-#upgrade-1 img {
-    display: none;
-}
-
-.upgrade-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
+.upgrade-button.pulsing {
+    animation: pulsate 0.9s cubic-bezier(.2, .8, .2, 1);
+    will-change: transform, box-shadow, filter;
 }
 
 .upgrade-cost {
     color: white;
     background: rgba(0, 0, 0, 0.65);
-    padding: 4px 8px;
-    border-radius: 8px;
+    padding: 2px 4px;
+    border-radius: 6px;
     font-size: 12px;
     white-space: nowrap;
 }
@@ -162,7 +212,6 @@ button {
     color: #ddd;
 }
 
-/* Make the main image button smaller and center it in the viewport */
 .MainButton {
     position: absolute;
     left: 50%;
@@ -186,7 +235,6 @@ button {
     box-shadow: 0 0 0 rgba(255, 255, 200, 0);
 }
 
-/* Rotate the inner image continuously (independent of container transforms) */
 @keyframes spin360 {
     from {
         transform: rotate(0deg);
@@ -197,28 +245,11 @@ button {
     }
 }
 
-@keyframes icePulse {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 rgba(255, 255, 255, 0);
-    }
-
-    50% {
-        transform: scale(1.04);
-        box-shadow: 0 0 18px rgba(180, 230, 255, 0.55);
-    }
-
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 rgba(255, 255, 255, 0);
-    }
-}
 
 .MainButton img {
     animation: spin360 8s linear infinite;
 }
 
-/* Pulsate the container with stronger scale, glow and brightness */
 @keyframes pulsate {
     0% {
         transform: scale(1);
@@ -245,7 +276,6 @@ button {
     }
 }
 
-/* Apply pulsate to the circular image only when the parent has the pulsing class */
 .MainButton.pulsing img {
     animation: spin360 8s linear infinite, pulsate 0.9s cubic-bezier(.2, .8, .2, 1);
     will-change: transform, box-shadow, filter;
